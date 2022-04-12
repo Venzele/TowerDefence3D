@@ -5,17 +5,43 @@ using UnityEngine;
 public class Surface : MonoBehaviour
 {
     [SerializeField] private Vector3 _startPositionGround;
-    [SerializeField] private int _numberRow;
-    [SerializeField] private int _numberColumn;
+    [SerializeField] private int _numberRow, _numberColumn;
     [SerializeField] private Ground _ground;
     [SerializeField] private Way _way;
+    [SerializeField] private Forest _forest;
+    [SerializeField] private Start _startButton;
+    [SerializeField] private GameObject _containerGround;
+    [SerializeField] private MainMenuButton _mainMenuButton;
 
     private List<Ground> _grounds = new List<Ground>();
     
     public int NumberRow => _numberRow;
     public int NumberColumn => _numberColumn;
+    public Vector3 StartPositionGround => _startPositionGround;
 
-    public void CreateGround()
+    private void OnEnable()
+    {
+        _startButton.Started += CreateGround;
+        _mainMenuButton.Opened += RemoveGrounds;
+    }
+
+    private void OnDisable()
+    {
+        _startButton.Started -= CreateGround;
+        _mainMenuButton.Opened -= RemoveGrounds;
+    }
+
+    public Ground FindGround(int index)
+    {
+        return _grounds[index];
+    }
+
+    public int GetMaxGround()
+    {
+        return _grounds.Count;
+    }
+
+    private void CreateGround()
     {
         int positionInColumn = 0;
         int Column = 0;
@@ -25,7 +51,7 @@ public class Surface : MonoBehaviour
             Vector3 nextPositionGround = new Vector3(positionInColumn, 0, Column);
             Column++;
 
-            Ground newGround = Instantiate(_ground, _startPositionGround + nextPositionGround, Quaternion.identity);
+            Ground newGround = Instantiate(_ground, _startPositionGround + nextPositionGround, Quaternion.identity, _containerGround.transform);
             _grounds.Add(newGround);
 
             if (Column >= _numberRow)
@@ -36,10 +62,16 @@ public class Surface : MonoBehaviour
         }
 
         _way.CreatePath();
+        _forest.CreateForest();
     }
 
-    public Ground FindGround(int index)
+    private void RemoveGrounds()
     {
-        return _grounds[index];
+        foreach (var item in _grounds)
+        {
+            Destroy(item.gameObject);
+        }
+
+        _grounds.Clear();
     }
 }

@@ -5,21 +5,21 @@ using UnityEngine;
 public class Way : MonoBehaviour
 {
     [SerializeField] private Surface _surface;
+    [SerializeField] private MainMenuButton _mainMenuButton;
 
     private List<Ground> _way = new List<Ground>();
     private Ground _startRoad;
 
     public Ground StartRoad => _startRoad;
 
-    private void TrySetNextRoad(int indexGround, List<int> nextIndexesRoad, int direction, int extremeRow)
+    private void OnEnable()
     {
-        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.FindGround(indexGround + 1 * direction).IsGround)
-        {
-            if (indexGround < _surface.NumberRow)
-                nextIndexesRoad.Add(indexGround + 1 * direction);
-            else if (_surface.FindGround(indexGround + 1 * direction - _surface.NumberRow).IsGround)
-                nextIndexesRoad.Add(indexGround + 1 * direction);
-        }
+        _mainMenuButton.Opened += RemoveWay;
+    }
+
+    private void OnDisable()
+    {
+        _mainMenuButton.Opened -= RemoveWay;
     }
 
     public void CreatePath()
@@ -51,9 +51,23 @@ public class Way : MonoBehaviour
 
         for (int i = 0; i < _way.Count; i++)
         {
-            points.Add(_way[i].transform.position);
+            points.Add(_way[i].transform.position + new Vector3(0, _way[i].ScaleSize, 0));
         }
 
         return points;
+    }
+
+    private void TrySetNextRoad(int indexGround, List<int> nextIndexesRoad, int direction, int extremeRow)
+    {
+        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.FindGround(indexGround + 1 * direction).IsGround)
+        {
+            if (indexGround < _surface.NumberRow || _surface.FindGround(indexGround + 1 * direction - _surface.NumberRow).IsGround)
+                nextIndexesRoad.Add(indexGround + 1 * direction);
+        }
+    }
+
+    private void RemoveWay()
+    {
+        _way.Clear();
     }
 }
