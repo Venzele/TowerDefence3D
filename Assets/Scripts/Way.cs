@@ -14,12 +14,12 @@ public class Way : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMenuButton.Opened += Remove;
+        _mainMenuButton.Opened += RemovePath;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= Remove;
+        _mainMenuButton.Opened -= RemovePath;
     }
 
     public void CreatePath()
@@ -59,14 +59,14 @@ public class Way : MonoBehaviour
 
     private void TrySetNextRoad(int indexGround, List<int> nextIndexesRoad, int direction, int extremeRow)
     {
-        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.FindGround(indexGround + 1 * direction).IsGround)
+        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.FindGround(indexGround + 1 * direction).IsFree)
         {
-            if (indexGround < _surface.NumberRow || _surface.FindGround(indexGround + 1 * direction - _surface.NumberRow).IsGround)
+            if (indexGround < _surface.NumberRow || _surface.FindGround(indexGround + 1 * direction - _surface.NumberRow).IsFree)
                 nextIndexesRoad.Add(indexGround + 1 * direction);
         }
     }
 
-    private void Remove()
+    private void RemovePath()
     {
         _way.Clear();
     }

@@ -48,7 +48,7 @@ public class TowerSetter : MonoBehaviour
 
     private void TrySetTower(Ground ground, int price)
     {
-        if (ground != null && ground.IsGround)
+        if (ground != null && ground.IsFree)
         {
             _installableTower.transform.position = ground.transform.position + new Vector3(0, ground.HalfHeight, 0);
             _installableTower.ChangeColor(Color.green);
@@ -61,7 +61,7 @@ public class TowerSetter : MonoBehaviour
                 _towers.Add(_installableTower);
                 _bank.BuyTower(price);
                 _installableTower = null;
-                ground.Change();
+                ground.MakeBusy();
             }
         }
         else if (Input.GetMouseButtonUp(0))

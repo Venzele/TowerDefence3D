@@ -27,7 +27,7 @@ public class LaserBeam : MonoBehaviour
         transform.position = shootPoint.position + 0.5f * distance * transform.forward;
     }
 
-    public void ReturnDefault(Transform shootPoint)
+    public void Deactivate(Transform shootPoint)
     {
         transform.localScale = _defaultLaserBeamScale;
         transform.position = shootPoint.position;

@@ -85,7 +85,7 @@ public class Spawner : MonoBehaviour
 
     private void InstantiateEnemy()
     {
-        Enemy enemy = Instantiate(_currentWave.Template, transform.position, transform.rotation, transform).GetComponent<Enemy>();
+        Enemy enemy = Instantiate(_currentWave.Template, transform.position, transform.rotation, transform);
         enemy.ChangeStats(CurrentLevel);
         enemy.Init(_way, _base, _bank, this);
         enemy.SetWay();
@@ -105,7 +105,7 @@ public class Spawner : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
     }
 
-    private void NextWave()
+    private void BeginNextWave()
     {
         WaveStarted?.Invoke();
         StopSpawn();
@@ -153,7 +153,7 @@ public class Spawner : MonoBehaviour
         }
 
         _timeAfterLastWave = 0;
-        NextWave();
+        BeginNextWave();
     }
 
     private void RestartSpawn()

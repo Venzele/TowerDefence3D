@@ -7,23 +7,23 @@ public class Ground : MonoBehaviour
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private Material _road;
 
-    public bool IsGround { get; private set; }
+    public bool IsFree { get; private set; }
     public float HalfHeight { get; private set; }
 
     private void Awake()
     {
-        IsGround = true;
+        IsFree = true;
         HalfHeight = transform.localScale.y / 2;
     }
 
     public void ChangeOnRoad()
     {
         _meshRenderer.material = _road;
-        IsGround = false;
+        IsFree = false;
     }
 
-    public void Change()
+    public void MakeBusy()
     {
-        IsGround = false;
+        IsFree = false;
     }
 }

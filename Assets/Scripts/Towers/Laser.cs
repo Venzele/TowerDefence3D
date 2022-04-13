@@ -21,7 +21,7 @@ public class Laser : Tower
             FollowTheTarget();
 
             if (Target == null)
-                _laserBeam.ReturnDefault(ShootPoint);
+                _laserBeam.Deactivate(ShootPoint);
         }
     }
 

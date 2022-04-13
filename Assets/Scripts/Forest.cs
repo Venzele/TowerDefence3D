@@ -14,15 +14,15 @@ public class Forest : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMenuButton.Opened += Remove;
+        _mainMenuButton.Opened += RemoveTrees;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= Remove;
+        _mainMenuButton.Opened -= RemoveTrees;
     }
 
-    public void Create()
+    public void CreateTrees()
     {
         int numberOfTrees = Random.Range(_minTrees, _maxTrees);
 
@@ -32,10 +32,10 @@ public class Forest : MonoBehaviour
             Vector3 positionPoint = _surface.FindGround(indexGround).transform.position + new Vector3(0, _surface.FindGround(indexGround).HalfHeight, 0);
             GameObject tree = _templetes[Random.Range(0, _templetes.Count)];
 
-            if (_surface.FindGround(indexGround).IsGround)
+            if (_surface.FindGround(indexGround).IsFree)
             {
                 GameObject newTree = Instantiate(tree, positionPoint, Quaternion.identity, _containerForest.transform);
-                _surface.FindGround(indexGround).Change();
+                _surface.FindGround(indexGround).MakeBusy();
                 _trees.Add(newTree);
             }
             else
@@ -45,7 +45,7 @@ public class Forest : MonoBehaviour
         }
     }
 
-    private void Remove()
+    private void RemoveTrees()
     {
         foreach (var item in _trees)
         {

@@ -25,7 +25,12 @@ public class Core : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void Launch(float speed)
+    {
+        _rigidbody.velocity = transform.forward * speed;
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Ground ground) && _isAlife)
         {
@@ -35,11 +40,6 @@ public class Core : MonoBehaviour
             _isAlife = false;
             Destroy(gameObject);
         }
-    }
-
-    public void Launch(float speed)
-    {
-        _rigidbody.velocity = transform.forward * speed;
     }
 
     private void Trigger(Vector3 explosionPoint)

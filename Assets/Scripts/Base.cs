@@ -21,12 +21,12 @@ public class Base : MonoBehaviour
     {
         _isAlife = true;
         Health = _startHealth;
-        _mainMenuButton.Opened += OnSetDefaultHealth;
+        _mainMenuButton.Opened += ResetHealth;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= OnSetDefaultHealth;
+        _mainMenuButton.Opened -= ResetHealth;
     }
 
     private void OnValidate()
@@ -35,7 +35,7 @@ public class Base : MonoBehaviour
             _startHealth = 1;
     }
 
-    public void OnSetDefaultHealth()
+    public void ResetHealth()
     {
         _isAlife = true;
         Health = _startHealth;

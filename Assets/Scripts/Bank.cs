@@ -17,12 +17,12 @@ public class Bank : MonoBehaviour
     private void OnEnable()
     {
         Money = _startMoney;
-        _mainMenuButton.Opened += OnSetDefaultMoney;
+        _mainMenuButton.Opened += ResetMoney;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= OnSetDefaultMoney;
+        _mainMenuButton.Opened -= ResetMoney;
     }
 
     private void OnValidate()
@@ -31,7 +31,7 @@ public class Bank : MonoBehaviour
             _startMoney = 0;
     }
 
-    public void OnSetDefaultMoney()
+    public void ResetMoney()
     {
         Money = _startMoney;
     }
