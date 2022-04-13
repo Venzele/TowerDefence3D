@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194471fa235f48248909538d276b36e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 7
   _range: 2
   _age: 5
   _explosion: {fileID: 4279306519328818735, guid: fdbd4060705018b4aaae63d6d5155926,

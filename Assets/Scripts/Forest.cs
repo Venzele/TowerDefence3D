@@ -29,7 +29,7 @@ public class Forest : MonoBehaviour
         for (int i = 0; i < numberOfTrees; i++)
         {
             int indexGround = Random.Range(0, _surface.GetMaxGround());
-            Vector3 positionPoint = _surface.FindGround(indexGround).transform.position + new Vector3(0, _surface.FindGround(indexGround).ScaleSize, 0);
+            Vector3 positionPoint = _surface.FindGround(indexGround).transform.position + new Vector3(0, _surface.FindGround(indexGround).HalfHeight, 0);
             GameObject tree = _templetes[Random.Range(0, _templetes.Count)];
 
             if (_surface.FindGround(indexGround).IsGround)

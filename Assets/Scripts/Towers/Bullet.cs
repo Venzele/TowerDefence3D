@@ -35,9 +35,7 @@ public class Bullet : MonoBehaviour
 
         if (Physics.Raycast(_previousStep, transform.TransformDirection(Vector3.forward), out RaycastHit hit, distance))
         {
-            hit.collider.gameObject.TryGetComponent(out Enemy target);
-            
-            if (target != null)
+            if (hit.collider.gameObject.TryGetComponent(out Enemy target))
             {
                 target.TakeDamage(_damage);
                 Destroy(gameObject);

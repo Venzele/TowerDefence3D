@@ -14,9 +14,15 @@ public class Spawner : MonoBehaviour
 
     private Coroutine _goSpawn, _holdNextWave;
     private int _numberOfAllEnemies, _numberOfDeadEnemies;
+    private Wave _currentWave;
+    private int _currentWaveNumber = 0, _currentEnemyNumber;
+    private float _timeAfterLastWave, _timeAfterLastSpawn;
+    private bool _isEndWave = false;
 
     public int CurrentLevel { get; private set; }
 
+    public event UnityAction WaveFinished;
+    public event UnityAction WaveStarted;
     public event UnityAction AllEnemiesDied;
 
     private void OnEnable()
@@ -28,14 +34,6 @@ public class Spawner : MonoBehaviour
     {
         _mainMenuButton.Opened -= SpawnRestart;
     }
-
-    private Wave _currentWave;
-    private int _currentWaveNumber = 0, _currentEnemyNumber;
-    private float _timeAfterLastWave, _timeAfterLastSpawn;
-    private bool _isEndWave = false;
-
-    public event UnityAction WaveFinished;
-    public event UnityAction WaveStarted;
 
     public void StartNextWave()
     {
@@ -102,7 +100,7 @@ public class Spawner : MonoBehaviour
 
     private void SetPointSpawn()
     {
-        Vector3 pointSpawn = _way.StartRoad.transform.position + new Vector3(0, _way.StartRoad.ScaleSize, 0);
+        Vector3 pointSpawn = _way.StartRoad.transform.position + new Vector3(0, _way.StartRoad.HalfHeight, 0);
         Vector3 direction = _way.FindPointsWay()[1] - _way.FindPointsWay()[0];
 
         transform.position = pointSpawn;

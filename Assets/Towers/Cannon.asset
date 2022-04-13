@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cannon
   m_EditorClassIdentifier: 
   _preview: {fileID: 21300000, guid: 3fd128279b4e767429056b66418aaa61, type: 3}
-  _price: 200
+  _price: 250
   _prefab: {fileID: 4031911706922891229, guid: c898b3b9dafc99c4ea3c729ff760d004, type: 3}

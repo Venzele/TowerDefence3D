@@ -51,7 +51,7 @@ public class Way : MonoBehaviour
 
         for (int i = 0; i < _way.Count; i++)
         {
-            points.Add(_way[i].transform.position + new Vector3(0, _way[i].ScaleSize, 0));
+            points.Add(_way[i].transform.position + new Vector3(0, _way[i].HalfHeight, 0));
         }
 
         return points;

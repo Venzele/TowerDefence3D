@@ -33,7 +33,6 @@ public class TowerSetter : MonoBehaviour
         while (_installableTower != null)
         {
             Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            //Ray ray = _mainCamera.ScreenPointToRay(Input.GetTouch(0).position);
 
             if (Physics.Raycast(ray, out RaycastHit raycastHit))
             {
@@ -43,7 +42,7 @@ public class TowerSetter : MonoBehaviour
 
                 if (ground != null && ground.IsGround)
                 {
-                    _installableTower.transform.position = ground.transform.position + new Vector3(0, ground.ScaleSize, 0);
+                    _installableTower.transform.position = ground.transform.position + new Vector3(0, ground.HalfHeight, 0);
                     _installableTower.ChangeColor(Color.green);
 
                     if (Input.GetMouseButtonUp(0))
@@ -57,18 +56,6 @@ public class TowerSetter : MonoBehaviour
                         ground.ChangeGround();
                         break;
                     }
-
-                    //if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                    //{
-                    //    _installableTower.EnableTower(true);
-                    //    _installableTower.ChangeColor(Color.white);
-                    //    _installableTower.transform.parent = _containerTowers.transform;
-                    //    _towers.Add(_installableTower);
-                    //    _player.BuyTower(price);
-                    //    _installableTower = null;
-                    //    ground.ChangeGround();
-                    //    break;
-                    //}
                 }
             }
 
@@ -76,11 +63,6 @@ public class TowerSetter : MonoBehaviour
             {
                 Destroy(_installableTower.gameObject);
             }
-
-            //if (Input.GetTouch(0).phase == TouchPhase.Ended)
-            //{
-            //    Destroy(_installableTower.gameObject);
-            //}
 
             yield return null;
         }

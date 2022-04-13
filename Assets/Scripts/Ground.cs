@@ -8,12 +8,12 @@ public class Ground : MonoBehaviour
     [SerializeField] private Material _road;
 
     public bool IsGround { get; private set; }
-    public float ScaleSize { get; private set; }
+    public float HalfHeight { get; private set; }
 
     private void Awake()
     {
         IsGround = true;
-        ScaleSize = transform.localScale.y / 2;
+        HalfHeight = transform.localScale.y / 2;
     }
 
     public void ChangeGroundOnRoad()

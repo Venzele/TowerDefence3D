@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c989238b66057de4f80517d510374677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMoney: 150
+  _startMoney: 200
   _startHealth: 20
   _mainMenuButton: {fileID: 1939886170}
   _menu: {fileID: 1070434676}
