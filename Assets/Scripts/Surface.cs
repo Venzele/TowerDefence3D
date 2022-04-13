@@ -62,7 +62,7 @@ public class Surface : MonoBehaviour
         }
 
         _way.CreatePath();
-        _forest.CreateForest();
+        _forest.Create();
     }
 
     private void RemoveGrounds()

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour
 {
     [SerializeField] private Spawner _spawner;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Menu _menu;
     [SerializeField] private Start _startButton;
@@ -19,7 +19,7 @@ public class Pause : MonoBehaviour
     private void OnEnable()
     {
         _spawner.AllEnemiesDied += OnDeactivateButton;
-        _player.Destroyed += OnDeactivateButton;
+        _base.Destroyed += OnDeactivateButton;
         _mainMenuButton.Opened += OnActivateButton;
         _mainMenuButton.Opened += OnDisableButton;
         _startButton.Started += OnEnableButton;
@@ -30,7 +30,7 @@ public class Pause : MonoBehaviour
     private void OnDisable()
     {
         _spawner.AllEnemiesDied -= OnDeactivateButton;
-        _player.Destroyed -= OnDeactivateButton;
+        _base.Destroyed -= OnDeactivateButton;
         _mainMenuButton.Opened -= OnActivateButton;
         _mainMenuButton.Opened -= OnDisableButton;
         _startButton.Started -= OnEnableButton;

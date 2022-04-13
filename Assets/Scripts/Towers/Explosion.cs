@@ -9,12 +9,12 @@ public class Explosion : MonoBehaviour
 
     private float _elapsedTime;
 
-    public void ShowExplosion(float range)
+    public void Show(float range)
     {
-        StartCoroutine(AnimateExplosion(range));
+        StartCoroutine(Animate(range));
     }
 
-    private IEnumerator AnimateExplosion(float range)
+    private IEnumerator Animate(float range)
     {
         while(_elapsedTime < _age)
         {

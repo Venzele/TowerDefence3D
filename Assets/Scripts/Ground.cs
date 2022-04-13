@@ -16,13 +16,13 @@ public class Ground : MonoBehaviour
         HalfHeight = transform.localScale.y / 2;
     }
 
-    public void ChangeGroundOnRoad()
+    public void ChangeOnRoad()
     {
         _meshRenderer.material = _road;
         IsGround = false;
     }
 
-    public void ChangeGround()
+    public void Change()
     {
         IsGround = false;
     }

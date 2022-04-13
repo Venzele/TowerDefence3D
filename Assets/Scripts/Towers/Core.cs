@@ -8,12 +8,11 @@ public class Core : MonoBehaviour
     [SerializeField] private float _range, _age;
     [SerializeField] private Explosion _explosion;
     [SerializeField] private Rigidbody _rigidbody;
+    [SerializeField] private LayerMask _enemyLayerMask;
 
     private List<Explosion> _explosions = new List<Explosion>();
     private float _elapsedTime;
     private bool _isAlife = true;
-
-    private const int EnemyLayerMask = 1 << 7;
 
     private void Update()
     {
@@ -46,10 +45,10 @@ public class Core : MonoBehaviour
     private void Trigger(Vector3 explosionPoint)
     {
         Explosion newExplosion = Instantiate(_explosion, explosionPoint, Quaternion.identity, transform.parent);
-        newExplosion.ShowExplosion(_range);
+        newExplosion.Show(_range);
         _explosions.Add(newExplosion);
 
-        Collider[] targets = Physics.OverlapSphere(explosionPoint, _range, EnemyLayerMask);
+        Collider[] targets = Physics.OverlapSphere(explosionPoint, _range, _enemyLayerMask);
 
         if (targets.Length > 0)
         {

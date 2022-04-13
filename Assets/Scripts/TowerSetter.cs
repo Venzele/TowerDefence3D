@@ -7,7 +7,7 @@ public class TowerSetter : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private GameObject _containerTowers;
     [SerializeField] private MainMenuButton _mainMenuButton;
-    [SerializeField] private Player _player;
+    [SerializeField] private Bank _bank;
 
     private List<Tower> _towers = new List<Tower>();
     private Tower _installableTower;
@@ -39,32 +39,34 @@ public class TowerSetter : MonoBehaviour
                 _installableTower.transform.position = raycastHit.point;
                 _installableTower.ChangeColor(Color.red);
                 raycastHit.collider.gameObject.TryGetComponent(out Ground ground);
-
-                if (ground != null && ground.IsGround)
-                {
-                    _installableTower.transform.position = ground.transform.position + new Vector3(0, ground.HalfHeight, 0);
-                    _installableTower.ChangeColor(Color.green);
-
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        _installableTower.EnableTower(true);
-                        _installableTower.ChangeColor(Color.white);
-                        _installableTower.transform.parent = _containerTowers.transform;
-                        _towers.Add(_installableTower);
-                        _player.BuyTower(price);
-                        _installableTower = null;
-                        ground.ChangeGround();
-                        break;
-                    }
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                Destroy(_installableTower.gameObject);
+                TrySetTower(ground, price);
             }
 
             yield return null;
+        }
+    }
+
+    private void TrySetTower(Ground ground, int price)
+    {
+        if (ground != null && ground.IsGround)
+        {
+            _installableTower.transform.position = ground.transform.position + new Vector3(0, ground.HalfHeight, 0);
+            _installableTower.ChangeColor(Color.green);
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                _installableTower.Enable();
+                _installableTower.ChangeColor(Color.white);
+                _installableTower.transform.parent = _containerTowers.transform;
+                _towers.Add(_installableTower);
+                _bank.BuyTower(price);
+                _installableTower = null;
+                ground.Change();
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Destroy(_installableTower.gameObject);
         }
     }
 

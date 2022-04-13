@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BeginBattle : MonoBehaviour
 {
     [SerializeField] private Spawner _spawner;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
     [SerializeField] private Button _beginBattleButton;
     [SerializeField] private Start _startButton;
     [SerializeField] private MainMenuButton _mainMenuButton;
@@ -16,7 +16,7 @@ public class BeginBattle : MonoBehaviour
     private void OnEnable()
     {
         _spawner.AllEnemiesDied += OnDeactivateButton;
-        _player.Destroyed += OnDeactivateButton;
+        _base.Destroyed += OnDeactivateButton;
         _pauseButton.Paused += OnDeactivateButton;
         _mainMenuButton.Opened += OnActivateButton;
         _mainMenuButton.Opened += OnDisableButton;
@@ -28,7 +28,7 @@ public class BeginBattle : MonoBehaviour
     private void OnDisable()
     {
         _spawner.AllEnemiesDied -= OnDeactivateButton;
-        _player.Destroyed -= OnDeactivateButton;
+        _base.Destroyed -= OnDeactivateButton;
         _pauseButton.Paused -= OnDeactivateButton;
         _mainMenuButton.Opened -= OnActivateButton;
         _mainMenuButton.Opened -= OnDisableButton;

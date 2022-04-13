@@ -3,68 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour
+public class Base : MonoBehaviour
 {
-    [SerializeField] private int _startMoney;
     [SerializeField] private int _startHealth;
     [SerializeField] private MainMenuButton _mainMenuButton;
     [SerializeField] private Menu _menu;
 
     private bool _isAlife;
 
-    public int StartMoney => _startMoney;
     public int StartHealth => _startHealth;
-    public int Money { get; private set; }
     public int Health { get; private set; }
 
-    public event UnityAction<int> MoneyChanged;
     public event UnityAction<int> HealthChanged;
     public event UnityAction Destroyed;
 
     private void OnEnable()
     {
         _isAlife = true;
-        Money = _startMoney;
         Health = _startHealth;
-        _mainMenuButton.Opened += OnSetStartParameters;
+        _mainMenuButton.Opened += OnSetDefaultHealth;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= OnSetStartParameters;
+        _mainMenuButton.Opened -= OnSetDefaultHealth;
     }
 
     private void OnValidate()
     {
-        if (_startMoney < 0)
-            _startMoney = 0;
-
         if (_startHealth <= 0)
             _startHealth = 1;
     }
 
-    public void AddCoins(int money)
-    {
-        if (money > 0)
-        {
-            Money += money;
-            MoneyChanged?.Invoke(Money);
-        }
-    }
-
-    public void BuyTower(int price)
-    {
-        if (Money >= price)
-        {
-            Money -= price;
-            MoneyChanged?.Invoke(Money);
-        }
-    }
-
-    public void OnSetStartParameters()
+    public void OnSetDefaultHealth()
     {
         _isAlife = true;
-        Money = _startMoney;
         Health = _startHealth;
     }
 

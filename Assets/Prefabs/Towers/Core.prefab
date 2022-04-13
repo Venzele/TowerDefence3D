@@ -52,6 +52,9 @@ MonoBehaviour:
   _explosion: {fileID: 4279306519328818735, guid: fdbd4060705018b4aaae63d6d5155926,
     type: 3}
   _rigidbody: {fileID: 1742217588906275879}
+  _enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!135 &8301429635484736200
 SphereCollider:
   m_ObjectHideFlags: 0

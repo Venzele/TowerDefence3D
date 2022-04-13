@@ -8,7 +8,7 @@ public class Restart : MonoBehaviour
     [SerializeField] private Button _restartButton;
     [SerializeField] private Start _startButton;
     [SerializeField] private MainMenuButton _mainMenuButton;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private InfoLevel _infoLevel;
 
@@ -16,14 +16,14 @@ public class Restart : MonoBehaviour
 
     private void OnEnable()
     {
-        _player.Destroyed += OnEnableButton; 
+        _base.Destroyed += OnEnableButton; 
         _startButton.Started += OnDisableButton;
         _restartButton.onClick.AddListener(OnButtonClick);
     }
 
     private void OnDisable()
     {
-        _player.Destroyed -= OnEnableButton;
+        _base.Destroyed -= OnEnableButton;
         _startButton.Started -= OnDisableButton;
         _restartButton.onClick.RemoveListener(OnButtonClick);
     }

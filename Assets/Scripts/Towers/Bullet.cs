@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-        CheckHit();
+        TraceHit();
 
         _elapsedTime += Time.deltaTime;
 
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void CheckHit()
+    private void TraceHit()
     {
         float distance = Vector3.Distance(_previousStep, transform.position);
 

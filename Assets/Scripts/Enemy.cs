@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SphereCollider _sphereCollider;
 
     private Way _way;
-    private Player _player;
+    private Base _base;
+    private Bank _bank;
     private Spawner _spawner;
     private Vector3[] _points;
     private float _speedRotation = 400;
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour
 
             if(_currentPoint >= _points.Length)
             {
-                _player.TakeDamage(_damage);
+                _base.TakeDamage(_damage);
                 IsDead = true;
                 Destroy(gameObject);
                 _spawner.CountDeadEnemy(this);
@@ -83,18 +84,19 @@ public class Enemy : MonoBehaviour
 
     public void SetWay()
     {
-        _points = new Vector3[_way.FindPointsWay().Count];
+        _points = new Vector3[_way.FindPoints().Count];
 
-        for (int i = 0; i < _way.FindPointsWay().Count; i++)
+        for (int i = 0; i < _way.FindPoints().Count; i++)
         {
-            _points[i] = _way.FindPointsWay()[i];
+            _points[i] = _way.FindPoints()[i];
         }
     }
 
-    public void Init(Way way, Player player, Spawner spawner)
+    public void Init(Way way, Base mainBase, Bank bank, Spawner spawner)
     {
         _way = way;
-        _player = player;
+        _base = mainBase;
+        _bank = bank;
         _spawner = spawner;
     }
 
@@ -106,7 +108,7 @@ public class Enemy : MonoBehaviour
 
             if (_health <= 0 && IsDead == false)
             {
-                _player.AddCoins(_reward);
+                _bank.AddCoins(_reward);
                 IsDead = true;
                 Destroy(gameObject);
                 _spawner.CountDeadEnemy(this);

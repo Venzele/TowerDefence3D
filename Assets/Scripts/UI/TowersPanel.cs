@@ -9,7 +9,8 @@ public class TowersPanel : MonoBehaviour
     [SerializeField] private TowerSetter _towerSetter;
     [SerializeField] private TowerView _itemTemplate;
     [SerializeField] private Transform _container;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
+    [SerializeField] private Bank _bank;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private Start _startButton;
@@ -22,23 +23,23 @@ public class TowersPanel : MonoBehaviour
     private void OnEnable()
     {
         _spawner.AllEnemiesDied += OnDeactivatePanel;
-        _player.Destroyed += OnDeactivatePanel;
-        _player.MoneyChanged += OnChangeItemColor;
+        _base.Destroyed += OnDeactivatePanel;
+        _bank.MoneyChanged += OnChangeItemColor;
         _pauseButton.Paused += OnDeactivatePanel;
-        _startButton.Started += OnEnableTowerPanel;
+        _startButton.Started += OnEnablePanel;
         _resumeButton.Resumed += OnActivatePanel;
-        _mainMenuButton.Opened += OnDisableTowerPanel;
+        _mainMenuButton.Opened += OnDisablePanel;
     }
 
     private void OnDisable()
     {
         _spawner.AllEnemiesDied -= OnDeactivatePanel;
-        _player.Destroyed -= OnDeactivatePanel;
-        _player.MoneyChanged -= OnChangeItemColor;
+        _base.Destroyed -= OnDeactivatePanel;
+        _bank.MoneyChanged -= OnChangeItemColor;
         _pauseButton.Paused -= OnDeactivatePanel;
-        _startButton.Started -= OnEnableTowerPanel;
+        _startButton.Started -= OnEnablePanel;
         _resumeButton.Resumed -= OnActivatePanel;
-        _mainMenuButton.Opened -= OnDisableTowerPanel;
+        _mainMenuButton.Opened -= OnDisablePanel;
     }
 
     private void Start()
@@ -58,7 +59,7 @@ public class TowersPanel : MonoBehaviour
 
     private void OnItemSelected(ItemData itemData)
     {
-        if (itemData.Price <= _player.Money)
+        if (itemData.Price <= _bank.Money)
         {
             _towerSetter.StartSetTower(itemData);
         }
@@ -70,14 +71,14 @@ public class TowersPanel : MonoBehaviour
         TowerView.ItemDisabled -= OnItemDisabled;
     }
 
-    private void OnEnableTowerPanel()
+    private void OnEnablePanel()
     {
         _canvasGroup.blocksRaycasts = true;
         _canvasGroup.alpha = 1;
-        OnChangeItemColor(_player.StartMoney);
+        OnChangeItemColor(_bank.StartMoney);
     }
 
-    private void OnDisableTowerPanel()
+    private void OnDisablePanel()
     {
         _canvasGroup.blocksRaycasts = false;
         _canvasGroup.alpha = 0;

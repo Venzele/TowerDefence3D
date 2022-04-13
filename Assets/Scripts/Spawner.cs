@@ -7,7 +7,8 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<Wave> _waves;
     [SerializeField] private Way _way;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
+    [SerializeField] private Bank _bank;
     [SerializeField] private float _delayBetweenWaves;
     [SerializeField] private MainMenuButton _mainMenuButton;
     [SerializeField] private Menu _menu;
@@ -27,12 +28,12 @@ public class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMenuButton.Opened += SpawnRestart;
+        _mainMenuButton.Opened += RestartSpawn;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= SpawnRestart;
+        _mainMenuButton.Opened -= RestartSpawn;
     }
 
     public void StartNextWave()
@@ -58,10 +59,7 @@ public class Spawner : MonoBehaviour
 
     public void SetLevel(int level)
     {
-        if (level < 0)
-            CurrentLevel = 0;
-        else
-            CurrentLevel = level;
+        CurrentLevel = Mathf.Clamp(CurrentLevel, 0, level);
     }
 
     public void CountDeadEnemy(Enemy enemy)
@@ -70,7 +68,7 @@ public class Spawner : MonoBehaviour
         {
             _numberOfDeadEnemies++;
             
-            if (_numberOfDeadEnemies == _numberOfAllEnemies && _player.Health > 0)
+            if (_numberOfDeadEnemies == _numberOfAllEnemies && _base.Health > 0)
             {
                 _menu.OpenPanel();
                 _menu.SetLabel("Victory!!!");
@@ -89,7 +87,7 @@ public class Spawner : MonoBehaviour
     {
         Enemy enemy = Instantiate(_currentWave.Template, transform.position, transform.rotation, transform).GetComponent<Enemy>();
         enemy.ChangeStats(CurrentLevel);
-        enemy.Init(_way, _player, this);
+        enemy.Init(_way, _base, _bank, this);
         enemy.SetWay();
     }
 
@@ -101,7 +99,7 @@ public class Spawner : MonoBehaviour
     private void SetPointSpawn()
     {
         Vector3 pointSpawn = _way.StartRoad.transform.position + new Vector3(0, _way.StartRoad.HalfHeight, 0);
-        Vector3 direction = _way.FindPointsWay()[1] - _way.FindPointsWay()[0];
+        Vector3 direction = _way.FindPoints()[1] - _way.FindPoints()[0];
 
         transform.position = pointSpawn;
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -158,7 +156,7 @@ public class Spawner : MonoBehaviour
         NextWave();
     }
 
-    private void SpawnRestart()
+    private void RestartSpawn()
     {
         Enemy[] enemies = GetComponentsInChildren<Enemy>();
 

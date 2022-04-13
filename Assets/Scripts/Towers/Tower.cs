@@ -7,14 +7,13 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected float TimeCooldown, Range;
     [SerializeField] protected Transform ShootPoint;
     [SerializeField] protected Transform Turret;
+    [SerializeField] protected LayerMask _enemyLayerMask;
 
     protected List<Color> DefaultColor = new List<Color>();
     protected Renderer[] Renderers;
     protected Enemy Target;
     protected float TimeAfterShoot;
-    protected bool IsSetTower = false;
-
-    private const int EnemyLayerMask = 1 << 7;
+    protected bool IsActiveTower = false;
 
     private void Awake()
     {
@@ -30,7 +29,7 @@ public abstract class Tower : MonoBehaviour
 
     protected void FollowTheTarget()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, Range, EnemyLayerMask);
+        Collider[] targets = Physics.OverlapSphere(transform.position, Range, _enemyLayerMask);
 
         if (targets.Length > 0)
             Target = targets[0].GetComponent<Enemy>();
@@ -60,7 +59,7 @@ public abstract class Tower : MonoBehaviour
 
     public void ChangeColor(Color color)
     {
-        if (IsSetTower)
+        if (IsActiveTower)
         {
             for (int i = 0; i < Renderers.Length; i++)
             {
@@ -76,8 +75,8 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
-    public void EnableTower(bool isSetTower)
+    public void Enable()
     {
-        IsSetTower = isSetTower;
+        IsActiveTower = true;
     }
 }

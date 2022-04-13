@@ -14,19 +14,19 @@ public class Way : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMenuButton.Opened += RemoveWay;
+        _mainMenuButton.Opened += Remove;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= RemoveWay;
+        _mainMenuButton.Opened -= Remove;
     }
 
     public void CreatePath()
     {
         int indexGround = Random.Range(1, _surface.NumberRow - 1);
         _startRoad = _surface.FindGround(indexGround);
-        _startRoad.ChangeGroundOnRoad();
+        _startRoad.ChangeOnRoad();
         _way.Add(_startRoad);
         Ground nextRoad = _startRoad;
         List<int> nextIndexesRoad = new List<int>();
@@ -39,13 +39,13 @@ public class Way : MonoBehaviour
 
             indexGround = nextIndexesRoad[Random.Range(0, nextIndexesRoad.Count)];
             nextRoad = _surface.FindGround(indexGround);
-            nextRoad.ChangeGroundOnRoad();
+            nextRoad.ChangeOnRoad();
             _way.Add(nextRoad);
             nextIndexesRoad.Clear();
         }
     }
 
-    public List<Vector3> FindPointsWay()
+    public List<Vector3> FindPoints()
     {
         List<Vector3> points = new List<Vector3>();
 
@@ -66,7 +66,7 @@ public class Way : MonoBehaviour
         }
     }
 
-    private void RemoveWay()
+    private void Remove()
     {
         _way.Clear();
     }

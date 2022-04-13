@@ -7,7 +7,8 @@ public class InfoBalance : MonoBehaviour
 {
     [SerializeField] private TMP_Text _money;
     [SerializeField] private TMP_Text _health;
-    [SerializeField] private Player _player;
+    [SerializeField] private Base _base;
+    [SerializeField] private Bank _bank;
     [SerializeField] private GameObject _panelBalance;
     [SerializeField] private Start _startButton;
     [SerializeField] private MainMenuButton _mainMenuButton;
@@ -16,16 +17,16 @@ public class InfoBalance : MonoBehaviour
     {
         _startButton.Started += OnEnablePanel;
         _mainMenuButton.Opened += OnDisablePanel;
-        _player.MoneyChanged += OnMoneyChanged;
-        _player.HealthChanged += OnHealthChanged;
+        _bank.MoneyChanged += OnMoneyChanged;
+        _base.HealthChanged += OnHealthChanged;
     }
 
     private void OnDisable()
     {
         _startButton.Started -= OnEnablePanel;
         _mainMenuButton.Opened -= OnDisablePanel;
-        _player.MoneyChanged -= OnMoneyChanged;
-        _player.HealthChanged -= OnHealthChanged;
+        _bank.MoneyChanged -= OnMoneyChanged;
+        _base.HealthChanged -= OnHealthChanged;
     }
 
     private void OnMoneyChanged(int money)
@@ -44,8 +45,8 @@ public class InfoBalance : MonoBehaviour
     private void OnEnablePanel()
     {
         _panelBalance.SetActive(true);
-        _money.text = _player.StartMoney.ToString();
-        _health.text = _player.StartHealth.ToString();
+        _money.text = _bank.StartMoney.ToString();
+        _health.text = _base.StartHealth.ToString();
     }
 
     private void OnDisablePanel()

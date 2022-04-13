@@ -16,7 +16,7 @@ public class Laser : Tower
 
     private void FixedUpdate()
     {
-        if (IsSetTower)
+        if (IsActiveTower)
         {
             FollowTheTarget();
 

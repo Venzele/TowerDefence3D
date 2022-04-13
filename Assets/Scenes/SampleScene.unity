@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 117845228}
   - component: {fileID: 117845229}
   - component: {fileID: 117845230}
+  - component: {fileID: 117845231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -451,7 +452,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 117845224}
   _containerTowers: {fileID: 708956782}
   _mainMenuButton: {fileID: 1939886170}
-  _player: {fileID: 117845230}
+  _bank: {fileID: 117845231}
 --- !u!114 &117845230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,13 +462,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 117845221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c989238b66057de4f80517d510374677, type: 3}
+  m_Script: {fileID: 11500000, guid: a87824329a3fc9849bb3aed976cf673a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMoney: 200
   _startHealth: 20
   _mainMenuButton: {fileID: 1939886170}
   _menu: {fileID: 1070434676}
+--- !u!114 &117845231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117845221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee8977e5ccb50144ace3e9de96a03fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startMoney: 200
+  _mainMenuButton: {fileID: 1939886170}
 --- !u!1 &140570900
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,7 +533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1905251143}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
   _nextWaveButton: {fileID: 1150546644}
   _mainMenuButton: {fileID: 1939886170}
   _pauseButton: {fileID: 1392071139}
@@ -1399,7 +1413,8 @@ MonoBehaviour:
   _itemTemplate: {fileID: 8214634358961772441, guid: d31374aeecbcdf749b9872ab9ab00b1b,
     type: 3}
   _container: {fileID: 851949474}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
+  _bank: {fileID: 117845231}
   _spawner: {fileID: 1905251143}
   _canvasGroup: {fileID: 2085018942}
   _startButton: {fileID: 1703058935}
@@ -2321,7 +2336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _money: {fileID: 677884429}
   _health: {fileID: 928506858}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
+  _bank: {fileID: 117845231}
   _panelBalance: {fileID: 1471869462}
   _startButton: {fileID: 1703058935}
   _mainMenuButton: {fileID: 1939886170}
@@ -3658,7 +3674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1905251143}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
   _beginBattleButton: {fileID: 553877038}
   _startButton: {fileID: 1703058935}
   _mainMenuButton: {fileID: 1939886170}
@@ -3726,7 +3742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1905251143}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
   _pauseButton: {fileID: 1863135085}
   _menu: {fileID: 1070434676}
   _startButton: {fileID: 1703058935}
@@ -4613,7 +4629,7 @@ MonoBehaviour:
   _restartButton: {fileID: 984043515}
   _startButton: {fileID: 1703058935}
   _mainMenuButton: {fileID: 1939886170}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
   _spawner: {fileID: 1905251143}
   _infoLevel: {fileID: 1150370300}
 --- !u!1 &1863135083
@@ -4779,7 +4795,8 @@ MonoBehaviour:
     Delay: 1
     Count: 10
   _way: {fileID: 117845226}
-  _player: {fileID: 117845230}
+  _base: {fileID: 117845230}
+  _bank: {fileID: 117845231}
   _delayBetweenWaves: 5
   _mainMenuButton: {fileID: 1939886170}
   _menu: {fileID: 1070434676}

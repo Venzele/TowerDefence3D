@@ -48,7 +48,9 @@ MonoBehaviour:
   Range: 5
   ShootPoint: {fileID: 7881830203308599367}
   Turret: {fileID: 6499237776444894463}
-  Model: {fileID: 6499237776444961121}
+  _enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _core: {fileID: -4807176628776247910, guid: ded5abc43fbce254096e182c2be27ba8, type: 3}
 --- !u!1 &6499237776444696689
 GameObject:

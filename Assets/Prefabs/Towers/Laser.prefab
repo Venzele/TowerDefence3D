@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _laserBeam: {fileID: 1499973648334748509}
 --- !u!1 &3349157804962287396
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +143,9 @@ MonoBehaviour:
   Range: 3
   ShootPoint: {fileID: 5945869217053696037}
   Turret: {fileID: 7878514548253361642}
+  _enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   _laserBeam: {fileID: 1267385171972504131}
   _model: {fileID: 7878696089049912854}
 --- !u!1 &7880169163928048710

@@ -8,7 +8,7 @@ public class MachineGun : Tower
 
     private void FixedUpdate()
     {
-        if (IsSetTower)
+        if (IsActiveTower)
             FollowTheTarget();
     }
 

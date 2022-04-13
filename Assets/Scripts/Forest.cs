@@ -14,15 +14,15 @@ public class Forest : MonoBehaviour
 
     private void OnEnable()
     {
-        _mainMenuButton.Opened += RemoveForest;
+        _mainMenuButton.Opened += Remove;
     }
 
     private void OnDisable()
     {
-        _mainMenuButton.Opened -= RemoveForest;
+        _mainMenuButton.Opened -= Remove;
     }
 
-    public void CreateForest()
+    public void Create()
     {
         int numberOfTrees = Random.Range(_minTrees, _maxTrees);
 
@@ -35,7 +35,7 @@ public class Forest : MonoBehaviour
             if (_surface.FindGround(indexGround).IsGround)
             {
                 GameObject newTree = Instantiate(tree, positionPoint, Quaternion.identity, _containerForest.transform);
-                _surface.FindGround(indexGround).ChangeGround();
+                _surface.FindGround(indexGround).Change();
                 _trees.Add(newTree);
             }
             else
@@ -45,7 +45,7 @@ public class Forest : MonoBehaviour
         }
     }
 
-    private void RemoveForest()
+    private void Remove()
     {
         foreach (var item in _trees)
         {
