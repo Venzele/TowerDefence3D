@@ -13,8 +13,9 @@ public class Surface : MonoBehaviour
     [SerializeField] private GameObject _containerGround;
     [SerializeField] private MainMenuButton _mainMenuButton;
 
-    private List<Ground> _grounds = new List<Ground>();
-    
+    private readonly List<Ground> _grounds = new List<Ground>();
+
+    public IReadOnlyList<Ground> Grounds => _grounds;
     public int NumberRow => _numberRow;
     public int NumberColumn => _numberColumn;
     public Vector3 StartPositionGround => _startPositionGround;
@@ -29,16 +30,6 @@ public class Surface : MonoBehaviour
     {
         _startButton.Started -= CreateGround;
         _mainMenuButton.Opened -= RemoveGrounds;
-    }
-
-    public Ground FindGround(int index)
-    {
-        return _grounds[index];
-    }
-
-    public int GetMaxGround()
-    {
-        return _grounds.Count;
     }
 
     private void CreateGround()

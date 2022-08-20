@@ -34,7 +34,7 @@ public class Core : MonoBehaviour
     {
         if (other.TryGetComponent(out Ground ground) && _isAlife)
         {
-            Vector3 explosionPoint = transform.position;
+            Vector3 explosionPoint = new Vector3(transform.position.x, ground.transform.position.y + ground.HalfHeight, transform.position.z);
             Trigger(explosionPoint);
 
             _isAlife = false;

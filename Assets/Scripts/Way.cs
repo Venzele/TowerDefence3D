@@ -25,7 +25,7 @@ public class Way : MonoBehaviour
     public void CreatePath()
     {
         int indexGround = Random.Range(1, _surface.NumberRow - 1);
-        _startRoad = _surface.FindGround(indexGround);
+        _startRoad = _surface.Grounds[indexGround];
         _startRoad.ChangeOnRoad();
         _way.Add(_startRoad);
         Ground nextRoad = _startRoad;
@@ -38,7 +38,7 @@ public class Way : MonoBehaviour
             nextIndexesRoad.Add(indexGround + _surface.NumberRow);
 
             indexGround = nextIndexesRoad[Random.Range(0, nextIndexesRoad.Count)];
-            nextRoad = _surface.FindGround(indexGround);
+            nextRoad = _surface.Grounds[indexGround];
             nextRoad.ChangeOnRoad();
             _way.Add(nextRoad);
             nextIndexesRoad.Clear();
@@ -59,9 +59,9 @@ public class Way : MonoBehaviour
 
     private void TrySetNextRoad(int indexGround, List<int> nextIndexesRoad, int direction, int extremeRow)
     {
-        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.FindGround(indexGround + 1 * direction).IsFree)
+        if ((indexGround + extremeRow) % _surface.NumberRow != 0 && _surface.Grounds[indexGround + 1 * direction].IsFree)
         {
-            if (indexGround < _surface.NumberRow || _surface.FindGround(indexGround + 1 * direction - _surface.NumberRow).IsFree)
+            if (indexGround < _surface.NumberRow || _surface.Grounds[indexGround + 1 * direction - _surface.NumberRow].IsFree)
                 nextIndexesRoad.Add(indexGround + 1 * direction);
         }
     }

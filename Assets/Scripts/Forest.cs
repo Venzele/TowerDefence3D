@@ -28,14 +28,14 @@ public class Forest : MonoBehaviour
 
         for (int i = 0; i < numberOfTrees; i++)
         {
-            int indexGround = Random.Range(0, _surface.GetMaxGround());
-            Vector3 positionPoint = _surface.FindGround(indexGround).transform.position + new Vector3(0, _surface.FindGround(indexGround).HalfHeight, 0);
+            int indexGround = Random.Range(0, _surface.Grounds.Count);
+            Vector3 positionPoint = _surface.Grounds[indexGround].transform.position + new Vector3(0, _surface.Grounds[indexGround].HalfHeight, 0);
             GameObject tree = _templetes[Random.Range(0, _templetes.Count)];
 
-            if (_surface.FindGround(indexGround).IsFree)
+            if (_surface.Grounds[indexGround].IsFree)
             {
                 GameObject newTree = Instantiate(tree, positionPoint, Quaternion.identity, _containerForest.transform);
-                _surface.FindGround(indexGround).MakeBusy();
+                _surface.Grounds[indexGround].MakeBusy();
                 _trees.Add(newTree);
             }
             else
